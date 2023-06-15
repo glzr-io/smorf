@@ -1,0 +1,36 @@
+{
+  "name": "smorf",
+  "version": "1.0.0",
+  "license": "MIT",
+  "description": "Form library for SolidJS.",
+  "repository": "github:lars-berger/smorf",
+  "keywords": [
+    "forms",
+    "solidjs",
+    "solid",
+    "typescript"
+  ],
+  "sideEffects": false,
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "prepublishOnly": "npm run build"
+  },
+  "peerDependencies": {
+    "solid-js": "1.7.3"
+  },
+  "dependencies": {
+    "@solid-primitives/set": "0.4.4",
+    "hotscript": "1.0.12"
+  },
+  "devDependencies": {
+    "prettier": "2.8.4",
+    "solid-js": "1.7.3",
+    "typescript": "5.0.4",
+    "vite": "4.3.0",
+    "vite-plugin-dts": "2.3.0",
+    "vite-plugin-solid": "2.7.0"
+  }
+}
