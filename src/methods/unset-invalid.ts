@@ -1,4 +1,4 @@
-import { FormValue, FieldPath, FormState } from '../types';
+import type { FormValue, FieldPath, FormState } from '../types';
 import { isTraversable } from '../utils';
 
 export interface UnsetInvalidOptions {
@@ -17,7 +17,7 @@ export function unsetInvalid<V extends FormValue, P extends FieldPath<V>>(
   invalidFieldPaths.delete(fieldPath);
 
   if (options?.deep && isTraversable(value)) {
-    const descendantPaths = Array.from(invalidFieldPaths.keys()).filter(key =>
+    const descendantPaths = Array.from(invalidFieldPaths.keys()).filter((key) =>
       key.startsWith(fieldPath),
     );
 

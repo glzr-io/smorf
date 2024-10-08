@@ -1,4 +1,4 @@
-import { FormValue, FieldPath, FormState } from '../types';
+import type { FormValue, FieldPath, FormState } from '../types';
 import { isTraversable } from '../utils';
 
 export interface UnsetTouchedOptions {
@@ -17,7 +17,7 @@ export function unsetTouched<V extends FormValue, P extends FieldPath<V>>(
   touchedFieldPaths.delete(fieldPath);
 
   if (options?.deep && isTraversable(value)) {
-    const descendantPaths = Array.from(touchedFieldPaths.keys()).filter(key =>
+    const descendantPaths = Array.from(touchedFieldPaths.keys()).filter((key) =>
       key.startsWith(fieldPath),
     );
 

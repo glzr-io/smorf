@@ -1,4 +1,4 @@
-import { FormValue, FieldPath, FormState } from '../types';
+import type { FormValue, FieldPath, FormState } from '../types';
 
 export function setDisabled<V extends FormValue, P extends FieldPath<V>>(
   formState: FormState<V>,

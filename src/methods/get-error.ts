@@ -1,4 +1,4 @@
-import { FormValue, FormState, FieldPath } from '../types';
+import type { FormValue, FormState, FieldPath } from '../types';
 
 /**
  * Get error for a field (if there is one).

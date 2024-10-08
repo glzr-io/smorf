@@ -1,6 +1,6 @@
-import { Call, Objects } from 'hotscript';
+import type { Call, Objects } from 'hotscript';
 
-import { FormValue } from './form-value.model';
+import type { FormValue } from './form-value.model';
 
 /**
  * Union of all field paths in a form.

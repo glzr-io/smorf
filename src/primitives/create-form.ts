@@ -1,4 +1,4 @@
-import { FormValue, FormState } from '../types';
+import type { FormValue, FormState } from '../types';
 import {
   isDisabled,
   isDirty,

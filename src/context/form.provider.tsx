@@ -1,7 +1,7 @@
-import { JSXElement } from 'solid-js';
+import type { JSXElement } from 'solid-js';
 
 import { FormContext } from './form.context';
-import { FormValue, FormState } from '../types';
+import type { FormValue, FormState } from '../types';
 
 export interface FormProviderProps<V extends FormValue> {
   formState: FormState<V>;

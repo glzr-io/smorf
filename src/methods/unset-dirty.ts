@@ -1,4 +1,4 @@
-import { FormValue, FieldPath, FormState } from '../types';
+import type { FormValue, FieldPath, FormState } from '../types';
 import { isTraversable } from '../utils';
 
 export interface UnsetDirtyOptions {
@@ -17,7 +17,7 @@ export function unsetDirty<V extends FormValue, P extends FieldPath<V>>(
   dirtyFieldPaths.delete(fieldPath);
 
   if (options?.deep && isTraversable(value)) {
-    const descendantPaths = Array.from(dirtyFieldPaths.keys()).filter(key =>
+    const descendantPaths = Array.from(dirtyFieldPaths.keys()).filter((key) =>
       key.startsWith(fieldPath),
     );
 

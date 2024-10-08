@@ -1,4 +1,4 @@
-import { FormValue, FieldPath, FormState } from '../types';
+import type { FormValue, FieldPath, FormState } from '../types';
 import { getDescendantFieldPaths, isTraversable } from '../utils';
 
 export interface SetTouchedOptions {

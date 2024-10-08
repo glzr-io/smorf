@@ -1,7 +1,7 @@
 import { ReactiveSet } from '@solid-primitives/set';
 import { createStore } from 'solid-js/store';
 
-import { FormValue, BaseFormState, FieldStates } from '../types';
+import type { FormValue, BaseFormState, FieldStates } from '../types';
 
 export function createBaseForm<V extends FormValue>(
   initialValue: V,

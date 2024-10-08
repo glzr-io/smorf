@@ -1,4 +1,4 @@
-import { FormValue, FieldPath, FormState, FieldValue } from '../types';
+import type { FormValue, FieldPath, FormState, FieldValue } from '../types';
 
 export interface SetValueOptions {
   /** Deeply updates touched state of any modified field paths. */
@@ -34,13 +34,10 @@ export function setValue<V extends FormValue, P extends FieldPath<V>>(
 ) {
   const { fieldPath, value, options } = extractArgs<V, P>(formState, ...args);
 
-  const currentValue = fieldPath
-    ? formState.getValue(fieldPath)
-    : formState.value;
+  const currentValue = fieldPath ? formState.getValue(fieldPath) : formState.value;
 
   // TODO: Avoid type coercion.
-  const newValue =
-    typeof value === 'function' ? value(currentValue as any) : value;
+  const newValue = typeof value === 'function' ? value(currentValue as any) : value;
 
   formState.__internal.setFormValue(
     // @ts-ignore - TODO

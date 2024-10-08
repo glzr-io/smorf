@@ -1,4 +1,4 @@
-import { FormValue, FormState, FieldPath } from '../types';
+import type { FormValue, FormState, FieldPath } from '../types';
 import { isTraversable } from '../utils';
 
 /**

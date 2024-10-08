@@ -1,7 +1,7 @@
-import { Call, Objects } from 'hotscript';
+import type { Call, Objects } from 'hotscript';
 
-import { FormValue } from './form-value.model';
-import { FieldPath } from './field-path.model';
+import type { FormValue } from './form-value.model';
+import type { FieldPath } from './field-path.model';
 
 /**
  * Type representing the value at given field path.

@@ -1,7 +1,7 @@
 import { useContext } from 'solid-js';
 
 import { FormContext } from './form.context';
-import { FormValue, FormState } from '../types';
+import type { FormValue, FormState } from '../types';
 
 export function useForm<V extends FormValue>() {
   const context = useContext(FormContext) as FormState<V>;

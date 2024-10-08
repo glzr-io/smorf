@@ -1,8 +1,8 @@
-import { Accessor } from 'solid-js';
+import type { Accessor } from 'solid-js';
 
-import { FieldPath } from './field-path.model';
-import { FieldValue } from './field-value.model';
-import { FormValue } from './form-value.model';
+import type { FieldPath } from './field-path.model';
+import type { FieldValue } from './field-value.model';
+import type { FormValue } from './form-value.model';
 
 export type FieldState<V extends FormValue, P extends FieldPath<V>> = {
   error: Accessor<string | null>;

@@ -1,8 +1,8 @@
-import { FieldPath } from './field-path.model';
-import { FieldValue } from './field-value.model';
-import { FormValue } from './form-value.model';
-import { BaseFormState } from './base-form-state.model';
-import {
+import type { FieldPath } from './field-path.model';
+import type { FieldValue } from './field-value.model';
+import type { FormValue } from './form-value.model';
+import type { BaseFormState } from './base-form-state.model';
+import type {
   SetDirtyOptions,
   SetInvalidOptions,
   SetTouchedOptions,
@@ -19,10 +19,7 @@ export interface FormState<V extends FormValue> extends BaseFormState<V> {
   isDisabled<P extends FieldPath<V>>(fieldPath: P): boolean;
   isInvalid<P extends FieldPath<V>>(fieldPath?: P): boolean;
   isTouched<P extends FieldPath<V>>(fieldPath?: P): boolean;
-  setDirty<P extends FieldPath<V>>(
-    fieldPath: P,
-    options?: SetDirtyOptions,
-  ): void;
+  setDirty<P extends FieldPath<V>>(fieldPath: P, options?: SetDirtyOptions): void;
   setDisabled<P extends FieldPath<V>>(fieldPath: P): void;
   setInvalid<P extends FieldPath<V>>(
     fieldPath: P,

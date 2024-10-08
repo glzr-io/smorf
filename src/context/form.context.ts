@@ -1,5 +1,5 @@
 import { createContext } from 'solid-js';
 
-import { FormState } from '../types';
+import type { FormState } from '../types';
 
 export const FormContext = createContext<FormState<any>>();

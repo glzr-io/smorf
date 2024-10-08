@@ -1,6 +1,6 @@
-import { Accessor, JSXElement, createMemo } from 'solid-js';
+import { type Accessor, type JSXElement, createMemo } from 'solid-js';
 
-import {
+import type {
   ChangeEvent,
   FieldPath,
   FieldState,

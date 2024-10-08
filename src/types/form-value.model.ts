@@ -1,4 +1,4 @@
-import { FieldPrimitive } from './field-primitive.model';
+import type { FieldPrimitive } from './field-primitive.model';
 
 export type NestedFormValue =
   | FieldPrimitive
