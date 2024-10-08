@@ -1,25 +1,25 @@
 {
   "name": "smorf",
   "version": "1.0.0",
-  "license": "MIT",
   "description": "Form library for SolidJS.",
-  "repository": "github:glzr-io/smorf",
   "keywords": [
     "forms",
     "solidjs",
     "solid",
     "typescript"
   ],
+  "repository": "github:glzr-io/smorf",
+  "license": "MIT",
   "sideEffects": false,
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "scripts": {
     "build": "tsup",
-    "dev": "npm run build -- --watch src"
+    "dev": "npm run build -- --watch src",
+    "format": "prettier --write .",
+    "lint": "prettier --check ."
   },
-  "peerDependencies": {
-    "solid-js": ">=1.7.0"
-  },
+  "prettier": "@glzr/style-guide/prettier",
   "dependencies": {
     "@solid-primitives/set": "0.4.4",
     "hotscript": "1.0.12"
@@ -28,8 +28,11 @@
     "@glzr/style-guide": "1.1.0",
     "prettier": "3.1.1",
     "solid-js": "1.7.3",
-    "typescript": "5.0.4",
     "tsup": "7.2.0",
-    "tsup-preset-solid": "2.1.0"
+    "tsup-preset-solid": "2.1.0",
+    "typescript": "5.0.4"
+  },
+  "peerDependencies": {
+    "solid-js": ">=1.7.0"
   }
 }
