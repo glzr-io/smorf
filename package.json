@@ -11,8 +11,20 @@
   "repository": "github:glzr-io/smorf",
   "license": "MIT",
   "sideEffects": false,
-  "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
+  "type": "module",
+  "exports": {
+    ".": {
+      "solid": "./dist/index.jsx",
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
+    },
+    "./styles": "./dist/index.css"
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "build": "tsup",
     "dev": "npm run build -- --watch src",
