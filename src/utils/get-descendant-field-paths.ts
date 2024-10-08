@@ -10,7 +10,9 @@ export function getDescendantFieldPaths(
       : keyOrIndex;
 
     // Type coercion is needed here to allow accessing `value` by string index.
-    const descendantValue = (value as { [index: string]: unknown })[keyOrIndex];
+    const descendantValue = (value as { [index: string]: unknown })[
+      keyOrIndex
+    ];
 
     if (isTraversable(descendantValue)) {
       return acc

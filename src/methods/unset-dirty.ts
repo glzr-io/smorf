@@ -17,8 +17,8 @@ export function unsetDirty<V extends FormValue, P extends FieldPath<V>>(
   dirtyFieldPaths.delete(fieldPath);
 
   if (options?.deep && isTraversable(value)) {
-    const descendantPaths = Array.from(dirtyFieldPaths.keys()).filter((key) =>
-      key.startsWith(fieldPath),
+    const descendantPaths = Array.from(dirtyFieldPaths.keys()).filter(
+      key => key.startsWith(fieldPath),
     );
 
     for (const descendantPath of descendantPaths) {

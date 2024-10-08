@@ -1,9 +1,14 @@
-import { type ComponentProps, type JSXElement, splitProps } from 'solid-js';
+import {
+  type ComponentProps,
+  type JSXElement,
+  splitProps,
+} from 'solid-js';
 
 import { FormProvider } from '../context/form.provider';
 import type { FormValue, FormState } from '../types';
 
-export interface FormProps<V extends FormValue> extends ComponentProps<'form'> {
+export interface FormProps<V extends FormValue>
+  extends ComponentProps<'form'> {
   of: FormState<V>;
   children: JSXElement;
 }

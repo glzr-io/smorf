@@ -8,7 +8,9 @@ export interface FormProviderProps<V extends FormValue> {
   children: JSXElement;
 }
 
-export function FormProvider<V extends FormValue>(props: FormProviderProps<V>) {
+export function FormProvider<V extends FormValue>(
+  props: FormProviderProps<V>,
+) {
   return (
     <FormContext.Provider value={props.formState}>
       {props.children}

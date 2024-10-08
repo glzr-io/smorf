@@ -17,7 +17,9 @@ import {
 } from '../methods';
 import { createBaseForm } from './create-base-form';
 
-export function createForm<V extends FormValue>(initialValue: V): FormState<V> {
+export function createForm<V extends FormValue>(
+  initialValue: V,
+): FormState<V> {
   const { value, __internal } = createBaseForm<V>(initialValue);
 
   const formState: FormState<V> = {
@@ -30,7 +32,9 @@ export function createForm<V extends FormValue>(initialValue: V): FormState<V> {
     getValue: (...args: unknown[]) =>
       getValue(
         // Coercion is needed because overloaded fn type isn't correctly inferred.
-        ...([formState, ...args] as unknown as Parameters<typeof getValue>),
+        ...([formState, ...args] as unknown as Parameters<
+          typeof getValue
+        >),
       ),
     setDirty: (...args) => setDirty(formState, ...args),
     setDisabled: (...args) => setDisabled(formState, ...args),
@@ -39,7 +43,9 @@ export function createForm<V extends FormValue>(initialValue: V): FormState<V> {
     setValue: (...args: unknown[]) =>
       setValue(
         // Coercion is needed because overloaded fn type isn't correctly inferred.
-        ...([formState, ...args] as unknown as Parameters<typeof setValue>),
+        ...([formState, ...args] as unknown as Parameters<
+          typeof setValue
+        >),
       ),
     unsetDirty: (...args) => unsetDirty(formState, ...args),
     unsetDisabled: (...args) => unsetDisabled(formState, ...args),

@@ -8,7 +8,8 @@ const myForm = createForm({ age: '0' });
   path="age"
   transform={{ in: val => Number(val), out: val => val.toString() }}
 >
-  {(_, props) => <NumberInput {...props} />} // 'props.value' is typed as number
+  {(_, props) => <NumberInput {...props} />} // 'props.value' is typed as
+  number
 </Field>;
 ```
 

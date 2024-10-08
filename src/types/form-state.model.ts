@@ -19,7 +19,10 @@ export interface FormState<V extends FormValue> extends BaseFormState<V> {
   isDisabled<P extends FieldPath<V>>(fieldPath: P): boolean;
   isInvalid<P extends FieldPath<V>>(fieldPath?: P): boolean;
   isTouched<P extends FieldPath<V>>(fieldPath?: P): boolean;
-  setDirty<P extends FieldPath<V>>(fieldPath: P, options?: SetDirtyOptions): void;
+  setDirty<P extends FieldPath<V>>(
+    fieldPath: P,
+    options?: SetDirtyOptions,
+  ): void;
   setDisabled<P extends FieldPath<V>>(fieldPath: P): void;
   setInvalid<P extends FieldPath<V>>(
     fieldPath: P,
@@ -32,7 +35,9 @@ export interface FormState<V extends FormValue> extends BaseFormState<V> {
   setValue(value: V | ((val: V) => V), options?: SetValueOptions): void;
   setValue<P extends FieldPath<V>>(
     fieldPath: P,
-    value: FieldValue<V, P> | ((val: FieldValue<V, P>) => FieldValue<V, P>),
+    value:
+      | FieldValue<V, P>
+      | ((val: FieldValue<V, P>) => FieldValue<V, P>),
     options?: SetValueOptions,
   ): void;
   unsetDirty<P extends FieldPath<V>>(

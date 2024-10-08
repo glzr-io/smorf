@@ -17,8 +17,8 @@ export function unsetInvalid<V extends FormValue, P extends FieldPath<V>>(
   invalidFieldPaths.delete(fieldPath);
 
   if (options?.deep && isTraversable(value)) {
-    const descendantPaths = Array.from(invalidFieldPaths.keys()).filter((key) =>
-      key.startsWith(fieldPath),
+    const descendantPaths = Array.from(invalidFieldPaths.keys()).filter(
+      key => key.startsWith(fieldPath),
     );
 
     for (const descendantPath of descendantPaths) {

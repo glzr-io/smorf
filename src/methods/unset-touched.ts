@@ -17,8 +17,8 @@ export function unsetTouched<V extends FormValue, P extends FieldPath<V>>(
   touchedFieldPaths.delete(fieldPath);
 
   if (options?.deep && isTraversable(value)) {
-    const descendantPaths = Array.from(touchedFieldPaths.keys()).filter((key) =>
-      key.startsWith(fieldPath),
+    const descendantPaths = Array.from(touchedFieldPaths.keys()).filter(
+      key => key.startsWith(fieldPath),
     );
 
     for (const descendantPath of descendantPaths) {

@@ -19,5 +19,5 @@ export function isDisabled<V extends FormValue, P extends FieldPath<V>>(
 
   return getAncestorFieldPaths(fieldPath)
     .concat(fieldPath)
-    .some((fieldPath) => disabledFieldPaths.has(fieldPath));
+    .some(fieldPath => disabledFieldPaths.has(fieldPath));
 }

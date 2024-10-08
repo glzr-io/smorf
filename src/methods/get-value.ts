@@ -1,4 +1,9 @@
-import type { FormValue, FieldValue, FieldPath, FormState } from '../types';
+import type {
+  FormValue,
+  FieldValue,
+  FieldPath,
+  FormState,
+} from '../types';
 
 /**
  * Get value of form or field value by its path.
