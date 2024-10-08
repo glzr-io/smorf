@@ -14,11 +14,11 @@ export function unsetInvalid<V extends FormValue, P extends FieldPath<V>>(
   const { value } = formState;
   const { invalidFieldPaths } = formState.__internal.fieldStates;
 
-  invalidFieldPaths.delete(fieldPath.toString());
+  invalidFieldPaths.delete(fieldPath);
 
   if (options?.deep && isTraversable(value)) {
     const descendantPaths = Array.from(invalidFieldPaths.keys()).filter(
-      key => key.startsWith(fieldPath.toString()),
+      key => key.startsWith(fieldPath),
     );
 
     for (const descendantPath of descendantPaths) {

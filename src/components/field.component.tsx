@@ -91,7 +91,7 @@ export function Field<
     const incomingValue = transform?.in ? transform.in(value) : value;
 
     return {
-      value: incomingValue,
+      value: incomingValue as T,
       onBlur: () => formState.setTouched(fieldPath),
       onChange: (eventOrValue: ChangeEvent<T> | T) => {
         const value = getChangeValue(eventOrValue);
@@ -107,5 +107,5 @@ export function Field<
     };
   });
 
-  return props.children(fieldState, fieldProps as any);
+  return props.children(fieldState, fieldProps);
 }

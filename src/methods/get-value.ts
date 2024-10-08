@@ -35,7 +35,6 @@ export function getValue<V extends FormValue, P extends FieldPath<V>>(
 
   return (
     fieldPath
-      .toString()
       // Split on dots and brackets.
       .split(/[\.\[\]]+/)
       // TODO: Avoid type coercion.

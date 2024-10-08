@@ -14,7 +14,7 @@ export function setInvalid<V extends FormValue, P extends FieldPath<V>>(
   const { value } = formState;
   const { invalidFieldPaths } = formState.__internal.fieldStates;
 
-  invalidFieldPaths.add(fieldPath.toString());
+  invalidFieldPaths.add(fieldPath);
 
   if (options?.deep && isTraversable(value)) {
     for (const descendantPath of getDescendantFieldPaths(value)) {

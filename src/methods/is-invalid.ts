@@ -23,14 +23,14 @@ export function isInvalid<V extends FormValue, P extends FieldPath<V>>(
     return invalidFieldPaths.size > 0;
   }
 
-  if (invalidFieldPaths.has(fieldPath.toString())) {
+  if (invalidFieldPaths.has(fieldPath)) {
     return true;
   }
 
   // No need to check descendants if the value is not an object or array.
   if (isTraversable(value)) {
     for (const invalidFieldPath of invalidFieldPaths) {
-      if (invalidFieldPath.startsWith(fieldPath.toString())) {
+      if (invalidFieldPath.startsWith(fieldPath)) {
         return true;
       }
     }

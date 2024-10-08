@@ -1,4 +1,5 @@
 import type { Paths } from 'type-fest';
+import type { ToString } from 'type-fest/source/internal';
 
 import type { FormValue } from './form-value.model';
 
@@ -10,4 +11,4 @@ import type { FormValue } from './form-value.model';
  * FieldPath<{ lorem: { ipsum: 1 }}> // 'lorem' | 'lorem.ipsum'
  * ```
  */
-export type FieldPath<V extends FormValue> = Paths<V>;
+export type FieldPath<V extends FormValue> = ToString<Paths<V>>;

@@ -17,7 +17,7 @@ export function isDisabled<V extends FormValue, P extends FieldPath<V>>(
 ): boolean {
   const { disabledFieldPaths } = formState.__internal.fieldStates;
 
-  return getAncestorFieldPaths(fieldPath.toString())
-    .concat(fieldPath.toString())
+  return getAncestorFieldPaths(fieldPath)
+    .concat(fieldPath)
     .some(fieldPath => disabledFieldPaths.has(fieldPath));
 }

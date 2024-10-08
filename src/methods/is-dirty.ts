@@ -23,14 +23,14 @@ export function isDirty<V extends FormValue, P extends FieldPath<V>>(
     return dirtyFieldPaths.size > 0;
   }
 
-  if (dirtyFieldPaths.has(fieldPath.toString())) {
+  if (dirtyFieldPaths.has(fieldPath)) {
     return true;
   }
 
   // No need to check descendants if the value is not an object or array.
   if (isTraversable(value)) {
     for (const dirtyFieldPath of dirtyFieldPaths) {
-      if (dirtyFieldPath.startsWith(fieldPath.toString())) {
+      if (dirtyFieldPath.startsWith(fieldPath)) {
         return true;
       }
     }
