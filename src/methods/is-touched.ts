@@ -23,14 +23,14 @@ export function isTouched<V extends FormValue, P extends FieldPath<V>>(
     return touchedFieldPaths.size > 0;
   }
 
-  if (touchedFieldPaths.has(fieldPath)) {
+  if (touchedFieldPaths.has(fieldPath.toString())) {
     return true;
   }
 
   // No need to check descendants if the value is not an object or array.
   if (isTraversable(value)) {
     for (const touchedFieldPath of touchedFieldPaths) {
-      if (touchedFieldPath.startsWith(fieldPath)) {
+      if (touchedFieldPath.startsWith(fieldPath.toString())) {
         return true;
       }
     }

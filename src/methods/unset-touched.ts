@@ -14,11 +14,11 @@ export function unsetTouched<V extends FormValue, P extends FieldPath<V>>(
   const { value } = formState;
   const { touchedFieldPaths } = formState.__internal.fieldStates;
 
-  touchedFieldPaths.delete(fieldPath);
+  touchedFieldPaths.delete(fieldPath.toString());
 
   if (options?.deep && isTraversable(value)) {
     const descendantPaths = Array.from(touchedFieldPaths.keys()).filter(
-      key => key.startsWith(fieldPath),
+      key => key.startsWith(fieldPath.toString()),
     );
 
     for (const descendantPath of descendantPaths) {

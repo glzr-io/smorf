@@ -5,5 +5,5 @@ export function setDisabled<V extends FormValue, P extends FieldPath<V>>(
   fieldPath: P,
 ) {
   const { invalidFieldPaths } = formState.__internal.fieldStates;
-  invalidFieldPaths.add(fieldPath);
+  invalidFieldPaths.add(fieldPath.toString());
 }

@@ -1,4 +1,4 @@
-import type { Call, Objects } from 'hotscript';
+import type { GetWithPath } from 'type-fest/source/get';
 
 import type { FormValue } from './form-value.model';
 import type { FieldPath } from './field-path.model';
@@ -11,7 +11,7 @@ import type { FieldPath } from './field-path.model';
  * FieldValue<{ first: { name: 'homer' } }, 'first.name'>; // 'homer'
  * ```
  */
-export type FieldValue<V extends FormValue, P extends FieldPath<V>> = Call<
-  Objects.Get<P>,
-  V
->;
+export type FieldValue<
+  V extends FormValue,
+  P extends FieldPath<V>,
+> = GetWithPath<V, P>;

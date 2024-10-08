@@ -11,9 +11,9 @@ importers:
       '@solid-primitives/set':
         specifier: 0.4.4
         version: 0.4.4(solid-js@1.7.3)
-      hotscript:
-        specifier: 1.0.12
-        version: 1.0.12
+      type-fest:
+        specifier: 4.26.1
+        version: 4.26.1
     devDependencies:
       '@glzr/style-guide':
         specifier: 1.1.0
@@ -659,9 +659,6 @@ packages:
     resolution: {integrity: sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ==}
     engines: {node: '>=8'}
 
-  hotscript@1.0.12:
-    resolution: {integrity: sha512-ANWgLMEhhfmmUsAkmJR6eclnVMC7KrDAAtOxWYN7PclUr1N5P9irs3WVJvMT/NpUxOXluYXj5JgyBG0iuKW5+Q==}
-
   html-entities@2.3.3:
     resolution: {integrity: sha512-DV5Ln36z34NNTDgnz0EWGBLZENelNAtkiFA4kyNOG2tDI6Mz1uSWiq1wAKdyjnJwyDiDO7Fa2SO1CTxPXL8VxA==}
 
@@ -1090,6 +1087,10 @@ packages:
         optional: true
       typescript:
         optional: true
+
+  type-fest@4.26.1:
+    resolution: {integrity: sha512-yOGpmOAL7CkKe/91I5O3gPICmJNLJ1G4zFYVAsRHg7M64biSnPtRj0WNQt++bRkjYOqjWXrhnUw1utzmVErAdg==}
+    engines: {node: '>=16'}
 
   typescript@5.0.4:
     resolution: {integrity: sha512-cW9T5W9xY37cc+jfEnaUvX91foxtHkza3Nw3wkoF4sSlKn0MONdkdEndig/qPBWXNkmplh3NzayQzCiHM4/hqw==}
@@ -1787,8 +1788,6 @@ snapshots:
 
   has-flag@4.0.0: {}
 
-  hotscript@1.0.12: {}
-
   html-entities@2.3.3: {}
 
   human-signals@2.1.0: {}
@@ -2151,6 +2150,8 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
       - ts-node
+
+  type-fest@4.26.1: {}
 
   typescript@5.0.4: {}
 

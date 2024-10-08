@@ -107,5 +107,5 @@ export function Field<
     };
   });
 
-  return props.children(fieldState, fieldProps);
+  return props.children(fieldState, fieldProps as any);
 }

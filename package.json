@@ -22,7 +22,7 @@
   "prettier": "@glzr/style-guide/prettier",
   "dependencies": {
     "@solid-primitives/set": "0.4.4",
-    "hotscript": "1.0.12"
+    "type-fest": "4.26.1"
   },
   "devDependencies": {
     "@glzr/style-guide": "1.1.0",
