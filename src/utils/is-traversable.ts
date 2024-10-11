@@ -1,5 +1,5 @@
 /**
- * Gets whether value can have nested values (ie. whether it's a primitive or
+ * Gets whether value can have nested values (i.e. whether it's a primitive or
  * array/object).
  */
 export function isTraversable(value: unknown): boolean {

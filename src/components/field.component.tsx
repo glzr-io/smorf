@@ -19,7 +19,9 @@ import {
   isTouched,
 } from '../methods';
 
-/** Extract value from `onChange` callback data. */
+/**
+ * Extracts value from `onChange` callback data.
+ */
 function getChangeValue<T extends NestedFormValue>(
   eventOrValue: ChangeEvent<T> | T,
 ) {

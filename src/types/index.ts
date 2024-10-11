@@ -1,4 +1,3 @@
-export * from './base-form-state.model';
 export * from './change-event.model';
 export * from './field-path.model';
 export * from './field-primitive.model';

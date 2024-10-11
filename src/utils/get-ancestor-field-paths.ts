@@ -7,7 +7,7 @@
  * ```
  */
 export function getAncestorFieldPaths(fieldPath: string) {
-  // Get array of paths (eg. ['some', 'nested', 'key']).
+  // Get array of paths (e.g. ['some', 'nested', 'key']).
   const splitFieldPath = fieldPath.split('.');
 
   return splitFieldPath.reduce((acc, _, index) => {

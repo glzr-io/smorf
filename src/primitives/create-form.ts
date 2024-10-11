@@ -1,4 +1,7 @@
-import type { FormValue, FormState } from '../types';
+import { ReactiveSet } from '@solid-primitives/set';
+import { createStore } from 'solid-js/store';
+
+import type { FormValue, FormState, FieldStates } from '../types';
 import {
   isDisabled,
   isDirty,
@@ -15,16 +18,21 @@ import {
   unsetInvalid,
   unsetTouched,
 } from '../methods';
-import { createBaseForm } from './create-base-form';
 
 export function createForm<V extends FormValue>(
   initialValue: V,
 ): FormState<V> {
-  const { value, __internal } = createBaseForm<V>(initialValue);
+  const [formValue, setFormValue] = createStore<V>(initialValue);
+
+  const [fieldStates, setFieldStates] = createStore<FieldStates>({
+    dirtyFieldPaths: new ReactiveSet(),
+    disabledFieldPaths: new ReactiveSet(),
+    invalidFieldPaths: new ReactiveSet(),
+    touchedFieldPaths: new ReactiveSet(),
+  });
 
   const formState: FormState<V> = {
-    value,
-    __internal,
+    value: formValue,
     isDisabled: (...args) => isDisabled(formState, ...args),
     isDirty: (...args) => isDirty(formState, ...args),
     isInvalid: (...args) => isInvalid(formState, ...args),
@@ -51,6 +59,11 @@ export function createForm<V extends FormValue>(
     unsetDisabled: (...args) => unsetDisabled(formState, ...args),
     unsetInvalid: (...args) => unsetInvalid(formState, ...args),
     unsetTouched: (...args) => unsetTouched(formState, ...args),
+    __internal: {
+      fieldStates,
+      setFormValue,
+      setFieldStates,
+    },
   };
 
   return formState;
