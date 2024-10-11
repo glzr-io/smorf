@@ -57,12 +57,12 @@ export interface FieldProps<
 
   /** Template function for children. */
   children: (
-    fieldState: FieldState<V, P>,
     props: Accessor<{
       value: T;
       onBlur: (event?: Event) => void;
       onChange: (eventOrValue: ChangeEvent<T> | T) => void;
     }>,
+    fieldState: FieldState<V, P>,
   ) => JSXElement;
 }
 
@@ -107,5 +107,5 @@ export function Field<
     };
   });
 
-  return props.children(fieldState, fieldProps);
+  return props.children(fieldProps, fieldState);
 }
