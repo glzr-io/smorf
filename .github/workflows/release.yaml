@@ -21,11 +21,11 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: glzr/actions/setup-pnpm@main
         with:
+          checkout: true
+          node-version: 20
           fetch-depth: 0
-
-      - uses: ./.github/actions/setup
 
       - run: pnpm build
 

@@ -6,8 +6,9 @@ jobs:
   lint-check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-
-      - uses: ./.github/actions/setup
+      - uses: glzr/actions/setup-pnpm@main
+        with:
+          checkout: true
+          node-version: 20
 
       - run: pnpm lint
