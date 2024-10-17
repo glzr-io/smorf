@@ -21,9 +21,11 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: ./.github/actions/setup
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
+      - uses: ./.github/actions/setup
 
       - run: pnpm build
 
@@ -34,3 +36,4 @@ jobs:
           gh-token: ${{ github.token }}
           npm-publish: true
           npm-token: ${{ secrets.NPM_TOKEN }}
+          npm-package-manager: pnpm
