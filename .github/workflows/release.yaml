@@ -21,7 +21,7 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: glzr/actions/setup-pnpm@main
+      - uses: glzr-io/actions/setup-pnpm@main
         with:
           checkout: true
           node-version: 20
