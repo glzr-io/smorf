@@ -33,11 +33,8 @@ export function getValue<V extends FormValue, P extends FieldPath<V>>(
     return formState.value;
   }
 
-  return (
-    fieldPath
-      // Split on dots and brackets.
-      .split(/[\.\[\]]+/)
-      // TODO: Avoid type coercion.
-      .reduce((r, k) => (r as any)?.[k], formState.value)
-  );
+  // TODO: Avoid type coercion.
+  return fieldPath
+    .split('.')
+    .reduce((r, k) => (r as any)?.[k], formState.value);
 }

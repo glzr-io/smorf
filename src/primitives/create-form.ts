@@ -1,5 +1,6 @@
 import { ReactiveSet } from '@solid-primitives/set';
 import { createStore } from 'solid-js/store';
+import { createSignal } from 'solid-js';
 
 import type { FormValue, FormState, FieldStates } from '../types';
 import {
@@ -22,7 +23,7 @@ import {
 export function createForm<V extends FormValue>(
   initialValue: V,
 ): FormState<V> {
-  const [formValue, setFormValue] = createStore<V>(initialValue);
+  const [formValue, setFormValue] = createSignal<V>(initialValue);
 
   const [fieldStates, setFieldStates] = createStore<FieldStates>({
     dirtyFieldPaths: new ReactiveSet(),
@@ -32,7 +33,9 @@ export function createForm<V extends FormValue>(
   });
 
   const formState: FormState<V> = {
-    value: formValue,
+    get value() {
+      return formValue();
+    },
     isDisabled: (...args) => isDisabled(formState, ...args),
     isDirty: (...args) => isDirty(formState, ...args),
     isInvalid: (...args) => isInvalid(formState, ...args),

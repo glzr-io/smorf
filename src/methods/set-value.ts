@@ -1,3 +1,5 @@
+import { batch } from 'solid-js';
+
 import type {
   FormValue,
   FieldPath,
@@ -50,21 +52,21 @@ export function setValue<V extends FormValue, P extends FieldPath<V>>(
   const newValue =
     typeof value === 'function' ? value(currentValue as any) : value;
 
-  formState.__internal.setFormValue(
-    // @ts-ignore - TODO
-    ...(fieldPath?.split?.('.') ?? []),
-    newValue,
-  );
+  batch(() => {
+    formState.__internal.setFormValue(
+      updatedObject(formState.value, fieldPath, newValue),
+    );
 
-  // TODO: Handle `setTouched` for root form.
-  if (fieldPath && options?.setTouched === true) {
-    formState.setTouched(fieldPath);
-  }
+    // TODO: Handle `setTouched` for root form.
+    if (fieldPath && options?.setTouched === true) {
+      formState.setTouched(fieldPath);
+    }
 
-  // TODO: Handle `setDirty` for root form.
-  if (fieldPath && options?.setDirty !== false) {
-    formState.setDirty(fieldPath);
-  }
+    // TODO: Handle `setDirty` for root form.
+    if (fieldPath && options?.setDirty !== false) {
+      formState.setDirty(fieldPath);
+    }
+  });
 }
 
 function extractArgs<V extends FormValue, P extends FieldPath<V>>(
@@ -86,4 +88,27 @@ function extractArgs<V extends FormValue, P extends FieldPath<V>>(
     value: args[0] as V | ((val: V) => V),
     options: args[1] as SetValueOptions,
   };
+}
+
+// TODO: Avoid `any` types.
+function updatedObject(
+  object: any,
+  fieldPath: string | null,
+  newValue: any,
+) {
+  if (!fieldPath) {
+    return newValue;
+  }
+
+  const stack = fieldPath.split('.');
+  const newObject = { ...object };
+  let target = newObject;
+
+  while (stack.length > 1) {
+    target = target[stack.shift()!];
+  }
+
+  target[stack.shift()!] = newValue;
+
+  return newObject;
 }
