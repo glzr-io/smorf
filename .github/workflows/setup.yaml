@@ -1,0 +1,26 @@
+name: Setup
+
+inputs:
+  fetch-depth:
+    description: Number of commits to fetch. 0 for all history.
+    required: false
+    default: 1
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: ${{ inputs.fetch-depth }}
+
+    - uses: pnpm/action-setup@v4
+      shell: bash
+
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 20
+        cache: pnpm
+      shell: bash
+
+    - run: pnpm i
+      shell: bash
