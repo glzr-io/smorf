@@ -25,6 +25,8 @@ jobs:
         with:
           fetch-depth: 0
 
+      - run: pnpm build
+
       - uses: glzr-io/actions/semantic-release@main
         with:
           gh-publish: true
