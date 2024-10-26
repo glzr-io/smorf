@@ -11,11 +11,11 @@ import type {
   NestedFormValue,
 } from '../types';
 import {
-  getError,
-  getValue,
-  isDirty,
-  isInvalid,
-  isTouched,
+  getFieldError,
+  getFieldValue,
+  isFieldDirty,
+  isFieldInvalid,
+  isFieldTouched,
 } from '../methods';
 
 /**
@@ -77,22 +77,22 @@ export function Field<
   const transform = props.transform;
 
   const fieldState = {
-    error: createMemo(() => getError(formState, fieldPath)),
-    isDirty: createMemo(() => isDirty(formState, fieldPath)),
-    isInvalid: createMemo(() => isInvalid(formState, fieldPath)),
-    isTouched: createMemo(() => isTouched(formState, fieldPath)),
-    value: createMemo(() => getValue(formState, fieldPath)),
+    error: createMemo(() => getFieldError(formState, fieldPath)),
+    isDirty: createMemo(() => isFieldDirty(formState, fieldPath)),
+    isInvalid: createMemo(() => isFieldInvalid(formState, fieldPath)),
+    isTouched: createMemo(() => isFieldTouched(formState, fieldPath)),
+    value: createMemo(() => getFieldValue(formState, fieldPath)),
   };
 
   const fieldProps = createMemo(() => {
-    const value = getValue(formState, fieldPath);
+    const value = getFieldValue(formState, fieldPath);
 
     // Transform incoming value if there is a transform function.
     const incomingValue = transform?.in ? transform.in(value) : value;
 
     return {
       value: incomingValue as T,
-      onBlur: () => formState.setTouched(fieldPath),
+      onBlur: () => formState.setFieldTouched(fieldPath),
       onChange: (eventOrValue: ChangeEvent<T> | T) => {
         const value = getChangeValue(eventOrValue);
 
@@ -101,8 +101,8 @@ export function Field<
           ? transform.out(value)
           : (value as FieldValue<V, P>);
 
-        formState.setValue(fieldPath, outgoingValue);
-        formState.setDirty(fieldPath);
+        formState.setFieldValue(fieldPath, outgoingValue);
+        formState.setFieldDirty(fieldPath);
       },
     };
   });

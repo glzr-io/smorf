@@ -3,43 +3,49 @@ import type { FieldStates } from './field-states.model';
 import type { FieldValue } from './field-value.model';
 import type { FormValue } from './form-value.model';
 import type {
-  SetDirtyOptions,
-  SetTouchedOptions,
-  SetValueOptions,
-  UnsetDirtyOptions,
-  UnsetTouchedOptions,
+  SetFieldDirtyOpts,
+  SetFieldTouchedOpts,
+  SetFieldValueOpts,
+  SetValueOpts,
+  UnsetFieldDirtyOpts,
+  UnsetFieldTouchedOpts,
 } from '../methods';
 
 export interface FormState<V extends FormValue> {
-  formValue: V;
-  getValue<P extends FieldPath<V>>(fieldPath: P): FieldValue<V, P>;
-  isDirty<P extends FieldPath<V>>(fieldPath?: P): boolean;
-  isInvalid<P extends FieldPath<V>>(fieldPath?: P): boolean;
-  isTouched<P extends FieldPath<V>>(fieldPath?: P): boolean;
-  setDirty<P extends FieldPath<V>>(
+  value: V;
+  getFieldValue<P extends FieldPath<V>>(fieldPath: P): FieldValue<V, P>;
+  isDirty(): boolean;
+  isFieldDirty<P extends FieldPath<V>>(fieldPath: P): boolean;
+  isFieldInvalid<P extends FieldPath<V>>(fieldPath: P): boolean;
+  isFieldTouched<P extends FieldPath<V>>(fieldPath: P): boolean;
+  isInvalid(): boolean;
+  isTouched(): boolean;
+  setFieldDirty<P extends FieldPath<V>>(
     fieldPath: P,
-    options?: SetDirtyOptions,
+    options?: SetFieldDirtyOpts,
   ): void;
-  setTouched<P extends FieldPath<V>>(
+  setFieldTouched<P extends FieldPath<V>>(
     fieldPath: P,
-    options?: SetTouchedOptions,
+    options?: SetFieldTouchedOpts,
   ): void;
-  setValue(value: V | ((val: V) => V), options?: SetValueOptions): void;
-  setValue<P extends FieldPath<V>>(
+  setFieldValue<P extends FieldPath<V>>(
     fieldPath: P,
     value:
       | FieldValue<V, P>
       | ((val: FieldValue<V, P>) => FieldValue<V, P>),
-    options?: SetValueOptions,
+    options?: SetFieldValueOpts,
   ): void;
-  unsetDirty<P extends FieldPath<V>>(
+  setValue(value: V | ((val: V) => V), options?: SetValueOpts): void;
+  unsetDirty(): void;
+  unsetFieldDirty<P extends FieldPath<V>>(
     fieldPath: P,
-    options?: UnsetDirtyOptions,
+    options?: UnsetFieldDirtyOpts,
   ): void;
-  unsetTouched<P extends FieldPath<V>>(
+  unsetFieldTouched<P extends FieldPath<V>>(
     fieldPath: P,
-    options?: UnsetTouchedOptions,
+    options?: UnsetFieldTouchedOpts,
   ): void;
+  unsetTouched(): void;
 
   __internal: {
     /**

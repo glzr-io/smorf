@@ -1,40 +1,15 @@
-import type { FormValue, FormState, FieldPath } from '../types';
-import { isTraversable } from '../utils';
+import type { FormState, FormValue } from '../types';
 
 /**
- * Whether the form or form field is touched.
+ * Whether the form is touched.
  *
- * A form or form field is touched if:
- * * The direct field path has been touched.
- * * Any of its descendant field paths have been touched.
+ * A form is touched if any of its field paths are touched.
  *
  * @param formState Form state.
- * @param fieldPath (optional) If provided, checks whether the field is touched;
- * otherwise checks the form as a whole.
  */
-export function isTouched<V extends FormValue, P extends FieldPath<V>>(
+export function isTouched<V extends FormValue>(
   formState: FormState<V>,
-  fieldPath?: P,
 ): boolean {
-  const { formValue } = formState;
   const { touchedFieldPaths } = formState.__internal.fieldStates;
-
-  if (!fieldPath) {
-    return touchedFieldPaths.size > 0;
-  }
-
-  if (touchedFieldPaths.has(fieldPath)) {
-    return true;
-  }
-
-  // No need to check descendants if the value is not an object or array.
-  if (isTraversable(formValue)) {
-    for (const touchedFieldPath of touchedFieldPaths) {
-      if (touchedFieldPath.startsWith(fieldPath)) {
-        return true;
-      }
-    }
-  }
-
-  return false;
+  return touchedFieldPaths.size > 0;
 }

@@ -4,13 +4,19 @@ import { createSignal } from 'solid-js';
 
 import type { FormValue, FormState, FieldStates } from '../types';
 import {
+  isFieldDirty,
+  isFieldInvalid,
+  isFieldTouched,
+  setFieldDirty,
+  setFieldValue,
+  setFieldTouched,
+  getFieldValue,
+  unsetFieldDirty,
+  unsetFieldTouched,
   isDirty,
-  isInvalid,
   isTouched,
-  setDirty,
+  isInvalid,
   setValue,
-  setTouched,
-  getValue,
   unsetDirty,
   unsetTouched,
 } from '../methods';
@@ -27,30 +33,24 @@ export function createForm<V extends FormValue>(
   });
 
   const formState: FormState<V> = {
-    get formValue() {
+    get value() {
       return formValue();
     },
+    getFieldValue: (...args) => getFieldValue(formState, ...args),
     isDirty: (...args) => isDirty(formState, ...args),
+    isFieldDirty: (...args) => isFieldDirty(formState, ...args),
+    isFieldInvalid: (...args) => isFieldInvalid(formState, ...args),
+    isFieldTouched: (...args) => isFieldTouched(formState, ...args),
     isInvalid: (...args) => isInvalid(formState, ...args),
     isTouched: (...args) => isTouched(formState, ...args),
-    getValue: (...args: unknown[]) =>
-      getValue(
-        // Coercion is needed because overloaded fn type isn't correctly inferred.
-        ...([formState, ...args] as unknown as Parameters<
-          typeof getValue
-        >),
-      ),
-    setDirty: (...args) => setDirty(formState, ...args),
-    setTouched: (...args) => setTouched(formState, ...args),
-    setValue: (...args: unknown[]) =>
-      setValue(
-        // Coercion is needed because overloaded fn type isn't correctly inferred.
-        ...([formState, ...args] as unknown as Parameters<
-          typeof setValue
-        >),
-      ),
+    setFieldDirty: (...args) => setFieldDirty(formState, ...args),
+    setFieldTouched: (...args) => setFieldTouched(formState, ...args),
+    setFieldValue: (...args) => setFieldValue(formState, ...args),
+    setValue: (...args) => setValue(formState, ...args),
     unsetDirty: (...args) => unsetDirty(formState, ...args),
+    unsetFieldDirty: (...args) => unsetFieldDirty(formState, ...args),
     unsetTouched: (...args) => unsetTouched(formState, ...args),
+    unsetFieldTouched: (...args) => unsetFieldTouched(formState, ...args),
     __internal: {
       fieldStates,
       setFormValue,

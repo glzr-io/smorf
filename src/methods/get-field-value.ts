@@ -11,10 +11,10 @@ import type {
  * @example
  * ```typescript
  * const form = createForm({ name: { first: 'bob' } });
- * form.getValue(form, 'name.first') // 'bob'
+ * form.getFieldValue(form, 'name.first') // 'bob'
  * ```
  */
-export function getValue<V extends FormValue, P extends FieldPath<V>>(
+export function getFieldValue<V extends FormValue, P extends FieldPath<V>>(
   formState: FormState<V>,
   fieldPath: P,
 ): FieldValue<V, P> {
@@ -23,6 +23,6 @@ export function getValue<V extends FormValue, P extends FieldPath<V>>(
     .split('.')
     .reduce(
       (state, key) => (state as any)?.[key],
-      formState.formValue,
+      formState.value,
     ) as FieldValue<V, P>;
 }

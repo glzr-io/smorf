@@ -1,40 +1,15 @@
-import type { FieldPath, FormState, FormValue } from '../types';
-import { isTraversable } from '../utils';
+import type { FormState, FormValue } from '../types';
 
 /**
- * Whether the form or form field is dirty.
+ * Whether the form is dirty.
  *
- * A form or form field is dirty if:
- * * The direct field path has been modified.
- * * Any of its descendant field paths have been modified.
+ * A form is dirty if any of its field paths are dirty.
  *
  * @param formState Form state.
- * @param fieldPath (optional) If provided, checks whether the field is dirty;
- * otherwise checks the form as a whole.
  */
-export function isDirty<V extends FormValue, P extends FieldPath<V>>(
+export function isDirty<V extends FormValue>(
   formState: FormState<V>,
-  fieldPath?: P,
 ): boolean {
-  const { formValue } = formState;
   const { dirtyFieldPaths } = formState.__internal.fieldStates;
-
-  if (!fieldPath) {
-    return dirtyFieldPaths.size > 0;
-  }
-
-  if (dirtyFieldPaths.has(fieldPath)) {
-    return true;
-  }
-
-  // No need to check descendants if the value is not an object or array.
-  if (isTraversable(formValue)) {
-    for (const dirtyFieldPath of dirtyFieldPaths) {
-      if (dirtyFieldPath.startsWith(fieldPath)) {
-        return true;
-      }
-    }
-  }
-
-  return false;
+  return dirtyFieldPaths.size > 0;
 }
