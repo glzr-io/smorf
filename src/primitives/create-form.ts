@@ -27,7 +27,7 @@ export function createForm<V extends FormValue>(
   });
 
   const formState: FormState<V> = {
-    get value() {
+    get formValue() {
       return formValue();
     },
     isDirty: (...args) => isDirty(formState, ...args),

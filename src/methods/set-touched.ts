@@ -11,13 +11,13 @@ export function setTouched<V extends FormValue, P extends FieldPath<V>>(
   fieldPath: P,
   options?: SetTouchedOptions,
 ) {
-  const { value } = formState;
+  const { formValue } = formState;
   const { touchedFieldPaths } = formState.__internal.fieldStates;
 
   touchedFieldPaths.add(fieldPath);
 
-  if (options?.deep && isTraversable(value)) {
-    for (const descendantPath of getDescendantFieldPaths(value)) {
+  if (options?.deep && isTraversable(formValue)) {
+    for (const descendantPath of getDescendantFieldPaths(formValue)) {
       touchedFieldPaths.add(descendantPath);
     }
   }

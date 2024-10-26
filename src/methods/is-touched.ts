@@ -16,7 +16,7 @@ export function isTouched<V extends FormValue, P extends FieldPath<V>>(
   formState: FormState<V>,
   fieldPath?: P,
 ): boolean {
-  const { value } = formState;
+  const { formValue } = formState;
   const { touchedFieldPaths } = formState.__internal.fieldStates;
 
   if (!fieldPath) {
@@ -28,7 +28,7 @@ export function isTouched<V extends FormValue, P extends FieldPath<V>>(
   }
 
   // No need to check descendants if the value is not an object or array.
-  if (isTraversable(value)) {
+  if (isTraversable(formValue)) {
     for (const touchedFieldPath of touchedFieldPaths) {
       if (touchedFieldPath.startsWith(fieldPath)) {
         return true;

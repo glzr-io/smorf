@@ -11,13 +11,13 @@ export function setDirty<V extends FormValue, P extends FieldPath<V>>(
   fieldPath: P,
   options?: SetDirtyOptions,
 ) {
-  const { value } = formState;
+  const { formValue } = formState;
   const { dirtyFieldPaths } = formState.__internal.fieldStates;
 
   dirtyFieldPaths.add(fieldPath);
 
-  if (options?.deep && isTraversable(value)) {
-    for (const descendantPath of getDescendantFieldPaths(value)) {
+  if (options?.deep && isTraversable(formValue)) {
+    for (const descendantPath of getDescendantFieldPaths(formValue)) {
       dirtyFieldPaths.add(descendantPath);
     }
   }

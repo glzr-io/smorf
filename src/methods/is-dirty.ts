@@ -16,7 +16,7 @@ export function isDirty<V extends FormValue, P extends FieldPath<V>>(
   formState: FormState<V>,
   fieldPath?: P,
 ): boolean {
-  const { value } = formState;
+  const { formValue } = formState;
   const { dirtyFieldPaths } = formState.__internal.fieldStates;
 
   if (!fieldPath) {
@@ -28,7 +28,7 @@ export function isDirty<V extends FormValue, P extends FieldPath<V>>(
   }
 
   // No need to check descendants if the value is not an object or array.
-  if (isTraversable(value)) {
+  if (isTraversable(formValue)) {
     for (const dirtyFieldPath of dirtyFieldPaths) {
       if (dirtyFieldPath.startsWith(fieldPath)) {
         return true;

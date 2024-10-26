@@ -30,11 +30,11 @@ export function getValue<V extends FormValue, P extends FieldPath<V>>(
   fieldPath?: P,
 ): V | FieldValue<V, P> {
   if (!fieldPath) {
-    return formState.value;
+    return formState.formValue;
   }
 
   // TODO: Avoid type coercion.
   return fieldPath
     .split('.')
-    .reduce((r, k) => (r as any)?.[k], formState.value);
+    .reduce((r, k) => (r as any)?.[k], formState.formValue);
 }

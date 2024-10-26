@@ -46,7 +46,7 @@ export function setValue<V extends FormValue, P extends FieldPath<V>>(
 
   const currentValue = fieldPath
     ? formState.getValue(fieldPath)
-    : formState.value;
+    : formState.formValue;
 
   // TODO: Avoid type coercion.
   const newValue =
@@ -54,7 +54,7 @@ export function setValue<V extends FormValue, P extends FieldPath<V>>(
 
   batch(() => {
     formState.__internal.setFormValue(
-      updatedObject(formState.value, fieldPath, newValue),
+      updatedObject(formState.formValue, fieldPath, newValue),
     );
 
     // TODO: Handle `setTouched` for root form.

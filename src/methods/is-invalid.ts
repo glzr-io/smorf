@@ -16,7 +16,7 @@ export function isInvalid<V extends FormValue, P extends FieldPath<V>>(
   formState: FormState<V>,
   fieldPath?: P,
 ): boolean {
-  const { value } = formState;
+  const { formValue } = formState;
   const { invalidFieldPaths } = formState.__internal.fieldStates;
 
   if (!fieldPath) {
@@ -28,7 +28,7 @@ export function isInvalid<V extends FormValue, P extends FieldPath<V>>(
   }
 
   // No need to check descendants if the value is not an object or array.
-  if (isTraversable(value)) {
+  if (isTraversable(formValue)) {
     for (const invalidFieldPath of invalidFieldPaths) {
       if (invalidFieldPath.startsWith(fieldPath)) {
         return true;

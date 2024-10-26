@@ -11,12 +11,12 @@ export function unsetDirty<V extends FormValue, P extends FieldPath<V>>(
   fieldPath: P,
   options?: UnsetDirtyOptions,
 ) {
-  const { value } = formState;
+  const { formValue } = formState;
   const { dirtyFieldPaths } = formState.__internal.fieldStates;
 
   dirtyFieldPaths.delete(fieldPath);
 
-  if (options?.deep && isTraversable(value)) {
+  if (options?.deep && isTraversable(formValue)) {
     const descendantPaths = Array.from(dirtyFieldPaths.keys()).filter(
       key => key.startsWith(fieldPath),
     );
