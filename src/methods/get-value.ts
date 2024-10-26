@@ -6,35 +6,23 @@ import type {
 } from '../types';
 
 /**
- * Get value of form or field value by its path.
+ * Get value of field by its path.
  *
  * @example
  * ```typescript
  * const form = createForm({ name: { first: 'bob' } });
- * getValue(form, 'name.first') // 'bob'
+ * form.getValue(form, 'name.first') // 'bob'
  * ```
  */
-
-// Function signature for getting value for form as a whole.
-export function getValue<V extends FormValue>(formState: FormState<V>): V;
-
-// Function signature for getting value for form field.
 export function getValue<V extends FormValue, P extends FieldPath<V>>(
   formState: FormState<V>,
   fieldPath: P,
-): FieldValue<V, P>;
-
-// Merged function signature.
-export function getValue<V extends FormValue, P extends FieldPath<V>>(
-  formState: FormState<V>,
-  fieldPath?: P,
-): V | FieldValue<V, P> {
-  if (!fieldPath) {
-    return formState.formValue;
-  }
-
+): FieldValue<V, P> {
   // TODO: Avoid type coercion.
   return fieldPath
     .split('.')
-    .reduce((r, k) => (r as any)?.[k], formState.formValue);
+    .reduce(
+      (state, key) => (state as any)?.[key],
+      formState.formValue,
+    ) as FieldValue<V, P>;
 }

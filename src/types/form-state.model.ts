@@ -12,7 +12,6 @@ import type {
 
 export interface FormState<V extends FormValue> {
   formValue: V;
-  getValue(): V;
   getValue<P extends FieldPath<V>>(fieldPath: P): FieldValue<V, P>;
   isDirty<P extends FieldPath<V>>(fieldPath?: P): boolean;
   isInvalid<P extends FieldPath<V>>(fieldPath?: P): boolean;
