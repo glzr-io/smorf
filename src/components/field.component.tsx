@@ -14,7 +14,6 @@ import {
   getError,
   getValue,
   isDirty,
-  isDisabled,
   isInvalid,
   isTouched,
 } from '../methods';
@@ -79,7 +78,6 @@ export function Field<
 
   const fieldState = {
     error: createMemo(() => getError(formState, fieldPath)),
-    isDisabled: createMemo(() => isDisabled(formState, fieldPath)),
     isDirty: createMemo(() => isDirty(formState, fieldPath)),
     isInvalid: createMemo(() => isInvalid(formState, fieldPath)),
     isTouched: createMemo(() => isTouched(formState, fieldPath)),

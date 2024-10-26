@@ -4,7 +4,6 @@ import { createSignal } from 'solid-js';
 
 import type { FormValue, FormState, FieldStates } from '../types';
 import {
-  isDisabled,
   isDirty,
   isInvalid,
   isTouched,
@@ -12,11 +11,7 @@ import {
   setValue,
   setTouched,
   getValue,
-  setDisabled,
-  setInvalid,
   unsetDirty,
-  unsetDisabled,
-  unsetInvalid,
   unsetTouched,
 } from '../methods';
 
@@ -27,7 +22,6 @@ export function createForm<V extends FormValue>(
 
   const [fieldStates, setFieldStates] = createStore<FieldStates>({
     dirtyFieldPaths: new ReactiveSet(),
-    disabledFieldPaths: new ReactiveSet(),
     invalidFieldPaths: new ReactiveSet(),
     touchedFieldPaths: new ReactiveSet(),
   });
@@ -36,7 +30,6 @@ export function createForm<V extends FormValue>(
     get value() {
       return formValue();
     },
-    isDisabled: (...args) => isDisabled(formState, ...args),
     isDirty: (...args) => isDirty(formState, ...args),
     isInvalid: (...args) => isInvalid(formState, ...args),
     isTouched: (...args) => isTouched(formState, ...args),
@@ -48,8 +41,6 @@ export function createForm<V extends FormValue>(
         >),
       ),
     setDirty: (...args) => setDirty(formState, ...args),
-    setDisabled: (...args) => setDisabled(formState, ...args),
-    setInvalid: (...args) => setInvalid(formState, ...args),
     setTouched: (...args) => setTouched(formState, ...args),
     setValue: (...args: unknown[]) =>
       setValue(
@@ -59,8 +50,6 @@ export function createForm<V extends FormValue>(
         >),
       ),
     unsetDirty: (...args) => unsetDirty(formState, ...args),
-    unsetDisabled: (...args) => unsetDisabled(formState, ...args),
-    unsetInvalid: (...args) => unsetInvalid(formState, ...args),
     unsetTouched: (...args) => unsetTouched(formState, ...args),
     __internal: {
       fieldStates,
