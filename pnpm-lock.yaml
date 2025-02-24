@@ -8,12 +8,18 @@ importers:
 
   .:
     dependencies:
+      '@solid-primitives/map':
+        specifier: 0.6.0
+        version: 0.6.0(solid-js@1.9.3)
       '@solid-primitives/set':
-        specifier: 0.5.0
-        version: 0.5.0(solid-js@1.9.3)
+        specifier: 0.6.0
+        version: 0.6.0(solid-js@1.9.3)
       type-fest:
         specifier: 4.26.1
         version: 4.26.1
+      zod:
+        specifier: 3.24.2
+        version: 3.24.2
     devDependencies:
       '@glzr/style-guide':
         specifier: 1.1.0
@@ -373,18 +379,23 @@ packages:
   '@sinclair/typebox@0.27.8':
     resolution: {integrity: sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA==}
 
-  '@solid-primitives/set@0.5.0':
-    resolution: {integrity: sha512-ccMQ89GtBrCZpGk4GKnWe+WurYe+UlK4yyiPxb0KetHqsBRLYcOkYHSDMmERNw3rwn8Cb/aVprKH0khoJqZe8g==}
+  '@solid-primitives/map@0.6.0':
+    resolution: {integrity: sha512-h8uCJNxUTvzNK/aTW9vJCd/PQeBkUL8i7AyLPvTFqMgcMnJ1I5GzAi5JODzxpxQwffxoqJyQtOE1vBqFzDv0Vw==}
     peerDependencies:
       solid-js: ^1.6.12
 
-  '@solid-primitives/trigger@1.1.0':
-    resolution: {integrity: sha512-00BbAiXV66WwjHuKZc3wr0+GLb9C24mMUmi3JdTpNFgHBbrQGrIHubmZDg36c5/7wH+E0GQtOOanwQS063PO+A==}
+  '@solid-primitives/set@0.6.0':
+    resolution: {integrity: sha512-P1Tp001m8ib5XCi/LEJHh2QsoS2uPO86HewtbrSxr2axt5te9EGc0UOwNKTPxNvNSLNHteUw5IrzDsEklW4m3g==}
     peerDependencies:
       solid-js: ^1.6.12
 
-  '@solid-primitives/utils@6.2.3':
-    resolution: {integrity: sha512-CqAwKb2T5Vi72+rhebSsqNZ9o67buYRdEJrIFzRXz3U59QqezuuxPsyzTSVCacwS5Pf109VRsgCJQoxKRoECZQ==}
+  '@solid-primitives/trigger@1.2.0':
+    resolution: {integrity: sha512-sW4/3cDXSjYQampn8CIFZ11BlxgNf2li8r2fXnb3b3YWE6RdZZCl8PhvpPF38Gzl0CnryrbTPJWM7OIkseCDgQ==}
+    peerDependencies:
+      solid-js: ^1.6.12
+
+  '@solid-primitives/utils@6.3.0':
+    resolution: {integrity: sha512-e7hTlJ1Ywh2+g/Qug+n4L1mpfxsikoIS4/sHE2EK9WatQt8UJqop/vE6bsLnXlU1xuhb/jo94Ah5Y27rd4wP7A==}
     peerDependencies:
       solid-js: ^1.6.12
 
@@ -1143,6 +1154,9 @@ packages:
     engines: {node: '>= 14'}
     hasBin: true
 
+  zod@3.24.2:
+    resolution: {integrity: sha512-lY7CDW43ECgW9u1TcT3IoXHflywfVqDYze4waEz812jR/bZ8FHDsl7pFQoSZTz5N+2NqRXs8GBwnAwo3ZNxqhQ==}
+
 snapshots:
 
   '@ampproject/remapping@2.3.0':
@@ -1485,17 +1499,22 @@ snapshots:
 
   '@sinclair/typebox@0.27.8': {}
 
-  '@solid-primitives/set@0.5.0(solid-js@1.9.3)':
+  '@solid-primitives/map@0.6.0(solid-js@1.9.3)':
     dependencies:
-      '@solid-primitives/trigger': 1.1.0(solid-js@1.9.3)
+      '@solid-primitives/trigger': 1.2.0(solid-js@1.9.3)
       solid-js: 1.9.3
 
-  '@solid-primitives/trigger@1.1.0(solid-js@1.9.3)':
+  '@solid-primitives/set@0.6.0(solid-js@1.9.3)':
     dependencies:
-      '@solid-primitives/utils': 6.2.3(solid-js@1.9.3)
+      '@solid-primitives/trigger': 1.2.0(solid-js@1.9.3)
       solid-js: 1.9.3
 
-  '@solid-primitives/utils@6.2.3(solid-js@1.9.3)':
+  '@solid-primitives/trigger@1.2.0(solid-js@1.9.3)':
+    dependencies:
+      '@solid-primitives/utils': 6.3.0(solid-js@1.9.3)
+      solid-js: 1.9.3
+
+  '@solid-primitives/utils@6.3.0(solid-js@1.9.3)':
     dependencies:
       solid-js: 1.9.3
 
@@ -2203,3 +2222,5 @@ snapshots:
   yallist@3.1.1: {}
 
   yaml@2.5.1: {}
+
+  zod@3.24.2: {}
