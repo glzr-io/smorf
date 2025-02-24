@@ -17,6 +17,7 @@ Field-level properties & methods
 
 ```ts
 getFieldError<P extends FieldPath<V>>(fieldPath: P): string | null;
+getFieldErrors<P extends FieldPath<V>>(fieldPath: P): string[];
 getFieldValue<P extends FieldPath<V>>(fieldPath: P): FieldValue<V, P>;
 isFieldDirty<P extends FieldPath<V>>(fieldPath: P): boolean;
 hasFieldError<P extends FieldPath<V>>(fieldPath: P): boolean;

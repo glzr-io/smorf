@@ -18,8 +18,21 @@ export function validate<V extends FormValue>(
 
   const result = options.schema.safeParse(formValue);
 
+  // Clear existing errors.
+  fieldStates.errorFieldPaths.clear();
+
+  // Aggregate errors by field path. A single field can have multiple
+  // errors.
   for (const error of result.error?.errors ?? []) {
-    fieldStates.errorFieldPaths.set(error.path.join('.'), error.message);
+    const fieldPath = error.path.join('.');
+
+    const existingErrors =
+      fieldStates.errorFieldPaths.get(fieldPath) ?? [];
+
+    fieldStates.errorFieldPaths.set(fieldPath, [
+      ...existingErrors,
+      error.message,
+    ]);
   }
 
   return result.success;

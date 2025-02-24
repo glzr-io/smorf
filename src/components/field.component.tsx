@@ -12,6 +12,7 @@ import type {
 } from '../types';
 import {
   getFieldError,
+  getFieldErrors,
   getFieldValue,
   isFieldDirty,
   hasFieldError,
@@ -81,6 +82,7 @@ export function Field<
 
   const fieldState = {
     error: createMemo(() => getFieldError(formState, fieldPath)),
+    errors: createMemo(() => getFieldErrors(formState, fieldPath)),
     isDirty: createMemo(() => isFieldDirty(formState, fieldPath)),
     hasError: createMemo(() => hasFieldError(formState, fieldPath)),
     isTouched: createMemo(() => isFieldTouched(formState, fieldPath)),

@@ -1,4 +1,5 @@
 export * from './get-field-error';
+export * from './get-field-errors';
 export * from './get-field-value';
 export * from './has-error';
 export * from './has-field-error';

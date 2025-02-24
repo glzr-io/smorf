@@ -2,27 +2,27 @@ import type { FormValue, FormState, FieldPath } from '../types';
 import { isTraversable } from '../utils';
 
 /**
- * Get the first error for a field (if there is one).
+ * Get all errors for a field.
  */
-export function getFieldError<V extends FormValue, P extends FieldPath<V>>(
-  formState: FormState<V>,
-  fieldPath: P,
-): string | null {
+export function getFieldErrors<
+  V extends FormValue,
+  P extends FieldPath<V>,
+>(formState: FormState<V>, fieldPath: P): string[] {
   const { value: formValue } = formState;
   const { errorFieldPaths } = formState.__internal.fieldStates;
 
   if (errorFieldPaths.has(fieldPath)) {
-    return errorFieldPaths.get(fieldPath)?.[0] ?? null;
+    return errorFieldPaths.get(fieldPath) ?? [];
   }
 
   // No need to check descendants if the value is not an object or array.
   if (isTraversable(formValue)) {
     for (const [errorFieldPath, errors] of errorFieldPaths) {
       if (errorFieldPath.startsWith(fieldPath)) {
-        return errors[0] ?? null;
+        return errors;
       }
     }
   }
 
-  return null;
+  return [];
 }
