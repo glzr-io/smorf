@@ -8,11 +8,26 @@ import type {
 } from '../types';
 
 export interface SetFieldValueOpts {
-  /** Deeply updates touched state of any modified field paths. */
+  /**
+   * Deeply updates touched state of any modified field paths.
+   *
+   * @default false
+   */
   setTouched?: boolean;
 
-  /** Deeply updates dirty state of any modified field paths. */
+  /**
+   * Deeply updates dirty state of any modified field paths.
+   *
+   * @default true
+   */
   setDirty?: boolean;
+
+  /**
+   * Validate the field after setting the value.
+   *
+   * @default true
+   */
+  validate?: boolean;
 }
 
 /**
@@ -40,6 +55,10 @@ export function setFieldValue<V extends FormValue, P extends FieldPath<V>>(
 
     if (fieldPath && options?.setDirty !== false) {
       formState.setFieldDirty(fieldPath);
+    }
+
+    if (fieldPath && options?.validate !== false) {
+      formState.validateField(fieldPath);
     }
   });
 }
