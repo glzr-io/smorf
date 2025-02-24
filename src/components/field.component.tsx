@@ -67,8 +67,12 @@ export interface FieldProps<
     fieldState: FieldState<V, P>,
   ) => JSXElement;
 
-  /** When to validate the field. */
-  validateOn?: 'blur' | 'change' | 'never';
+  /**
+   * When to validate the field.
+   *
+   * @default 'change'
+   */
+  validateOn?: 'blur' | 'change' | 'change-after-blur' | 'never';
 }
 
 export function Field<
@@ -121,6 +125,10 @@ export function Field<
         formState.setFieldDirty(fieldPath);
 
         if (validateOn === 'change') {
+          formState.validateField(fieldPath);
+        }
+
+        if (validateOn === 'change-after-blur' && fieldState.isTouched()) {
           formState.validateField(fieldPath);
         }
       },
