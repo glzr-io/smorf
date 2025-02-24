@@ -50,6 +50,7 @@ export interface FormState<V extends FormValue> {
   ): void;
   unsetTouched(): void;
   validate(): boolean;
+  validateField<P extends FieldPath<V>>(fieldPath: P): boolean;
 
   __internal: {
     /**

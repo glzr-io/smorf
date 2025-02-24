@@ -98,7 +98,7 @@ export function Field<
     const validateOn =
       props.validateOn ??
       formState.__internal.options?.validateOn ??
-      'blur';
+      'change';
 
     return {
       value: incomingValue as T,
@@ -106,7 +106,7 @@ export function Field<
         formState.setFieldTouched(fieldPath);
 
         if (validateOn === 'blur') {
-          formState.validate();
+          formState.validateField(fieldPath);
         }
       },
       onChange: (eventOrValue: ChangeEvent<T> | T) => {
@@ -121,7 +121,7 @@ export function Field<
         formState.setFieldDirty(fieldPath);
 
         if (validateOn === 'change') {
-          formState.validate();
+          formState.validateField(fieldPath);
         }
       },
     };

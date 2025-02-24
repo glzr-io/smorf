@@ -22,6 +22,7 @@ import {
   unsetDirty,
   unsetTouched,
   validate,
+  validateField,
   getFieldError,
   getFieldErrors,
 } from '../methods';
@@ -74,6 +75,7 @@ export function createForm<V extends FormValue>(
     unsetTouched: (...args) => unsetTouched(formState, ...args),
     unsetFieldTouched: (...args) => unsetFieldTouched(formState, ...args),
     validate: (...args) => validate(formState, ...args),
+    validateField: (...args) => validateField(formState, ...args),
     __internal: {
       options,
       fieldStates,

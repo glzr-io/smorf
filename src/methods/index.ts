@@ -16,3 +16,4 @@ export * from './unset-field-dirty';
 export * from './unset-field-touched';
 export * from './unset-touched';
 export * from './validate';
+export * from './validate-field';
