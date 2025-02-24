@@ -22,6 +22,8 @@ import {
   unsetDirty,
   unsetTouched,
   validate,
+  getFieldError,
+  getFieldErrors,
 } from '../methods';
 
 export type CreateFormOptions<V extends FormValue> = {
@@ -54,6 +56,8 @@ export function createForm<V extends FormValue>(
     get value() {
       return formValue();
     },
+    getFieldError: (...args) => getFieldError(formState, ...args),
+    getFieldErrors: (...args) => getFieldErrors(formState, ...args),
     getFieldValue: (...args) => getFieldValue(formState, ...args),
     isDirty: (...args) => isDirty(formState, ...args),
     isFieldDirty: (...args) => isFieldDirty(formState, ...args),

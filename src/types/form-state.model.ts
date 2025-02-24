@@ -14,12 +14,14 @@ import type { CreateFormOptions } from '../primitives';
 
 export interface FormState<V extends FormValue> {
   value: V;
+  getFieldError<P extends FieldPath<V>>(fieldPath: P): string | null;
+  getFieldErrors<P extends FieldPath<V>>(fieldPath: P): string[];
   getFieldValue<P extends FieldPath<V>>(fieldPath: P): FieldValue<V, P>;
   isDirty(): boolean;
   isFieldDirty<P extends FieldPath<V>>(fieldPath: P): boolean;
+  hasError(): boolean;
   hasFieldError<P extends FieldPath<V>>(fieldPath: P): boolean;
   isFieldTouched<P extends FieldPath<V>>(fieldPath: P): boolean;
-  hasError(): boolean;
   isTouched(): boolean;
   setFieldDirty<P extends FieldPath<V>>(
     fieldPath: P,
