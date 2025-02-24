@@ -14,7 +14,7 @@ import {
   getFieldError,
   getFieldValue,
   isFieldDirty,
-  isFieldInvalid,
+  hasFieldError,
   isFieldTouched,
 } from '../methods';
 
@@ -65,6 +65,9 @@ export interface FieldProps<
     }>,
     fieldState: FieldState<V, P>,
   ) => JSXElement;
+
+  /** When to validate the field. */
+  validateOn?: 'blur' | 'change' | 'never';
 }
 
 export function Field<
@@ -79,7 +82,7 @@ export function Field<
   const fieldState = {
     error: createMemo(() => getFieldError(formState, fieldPath)),
     isDirty: createMemo(() => isFieldDirty(formState, fieldPath)),
-    isInvalid: createMemo(() => isFieldInvalid(formState, fieldPath)),
+    hasError: createMemo(() => hasFieldError(formState, fieldPath)),
     isTouched: createMemo(() => isFieldTouched(formState, fieldPath)),
     value: createMemo(() => getFieldValue(formState, fieldPath)),
   };
@@ -90,9 +93,20 @@ export function Field<
     // Transform incoming value if there is a transform function.
     const incomingValue = transform?.in ? transform.in(value) : value;
 
+    const validateOn =
+      props.validateOn ??
+      formState.__internal.options?.validateOn ??
+      'blur';
+
     return {
       value: incomingValue as T,
-      onBlur: () => formState.setFieldTouched(fieldPath),
+      onBlur: () => {
+        formState.setFieldTouched(fieldPath);
+
+        if (validateOn === 'blur') {
+          formState.validate();
+        }
+      },
       onChange: (eventOrValue: ChangeEvent<T> | T) => {
         const value = getChangeValue(eventOrValue);
 
@@ -103,6 +117,10 @@ export function Field<
 
         formState.setFieldValue(fieldPath, outgoingValue);
         formState.setFieldDirty(fieldPath);
+
+        if (validateOn === 'change') {
+          formState.validate();
+        }
       },
     };
   });

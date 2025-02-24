@@ -1,11 +1,13 @@
 import { ReactiveSet } from '@solid-primitives/set';
+import { ReactiveMap } from '@solid-primitives/map';
 import { createStore } from 'solid-js/store';
 import { createSignal } from 'solid-js';
+import { z } from 'zod';
 
 import type { FormValue, FormState, FieldStates } from '../types';
 import {
   isFieldDirty,
-  isFieldInvalid,
+  hasFieldError,
   isFieldTouched,
   setFieldDirty,
   setFieldValue,
@@ -15,20 +17,36 @@ import {
   unsetFieldTouched,
   isDirty,
   isTouched,
-  isInvalid,
+  hasError,
   setValue,
   unsetDirty,
   unsetTouched,
+  validate,
 } from '../methods';
+
+export type CreateFormOptions<V extends FormValue> = {
+  /**
+   * The Zod schema to validate the form value against.
+   */
+  schema?: z.ZodType<V>;
+
+  /**
+   * When to validate the form.
+   *
+   * Can be overridden by the `validateOn` option in the `Field` component.
+   */
+  validateOn?: 'blur' | 'change' | 'never';
+};
 
 export function createForm<V extends FormValue>(
   initialValue: V,
+  options?: CreateFormOptions<V>,
 ): FormState<V> {
   const [formValue, setFormValue] = createSignal<V>(initialValue);
 
   const [fieldStates, setFieldStates] = createStore<FieldStates>({
     dirtyFieldPaths: new ReactiveSet(),
-    invalidFieldPaths: new ReactiveSet(),
+    errorFieldPaths: new ReactiveMap(),
     touchedFieldPaths: new ReactiveSet(),
   });
 
@@ -39,9 +57,9 @@ export function createForm<V extends FormValue>(
     getFieldValue: (...args) => getFieldValue(formState, ...args),
     isDirty: (...args) => isDirty(formState, ...args),
     isFieldDirty: (...args) => isFieldDirty(formState, ...args),
-    isFieldInvalid: (...args) => isFieldInvalid(formState, ...args),
+    hasFieldError: (...args) => hasFieldError(formState, ...args),
     isFieldTouched: (...args) => isFieldTouched(formState, ...args),
-    isInvalid: (...args) => isInvalid(formState, ...args),
+    hasError: (...args) => hasError(formState, ...args),
     isTouched: (...args) => isTouched(formState, ...args),
     setFieldDirty: (...args) => setFieldDirty(formState, ...args),
     setFieldTouched: (...args) => setFieldTouched(formState, ...args),
@@ -51,7 +69,9 @@ export function createForm<V extends FormValue>(
     unsetFieldDirty: (...args) => unsetFieldDirty(formState, ...args),
     unsetTouched: (...args) => unsetTouched(formState, ...args),
     unsetFieldTouched: (...args) => unsetFieldTouched(formState, ...args),
+    validate: (...args) => validate(formState, ...args),
     __internal: {
+      options,
       fieldStates,
       setFormValue,
       setFieldStates,

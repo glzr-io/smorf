@@ -7,7 +7,7 @@ import type { FormValue } from './form-value.model';
 export type FieldState<V extends FormValue, P extends FieldPath<V>> = {
   error: Accessor<string | null>;
   isDirty: Accessor<boolean>;
-  isInvalid: Accessor<boolean>;
+  hasError: Accessor<boolean>;
   isTouched: Accessor<boolean>;
 
   /**

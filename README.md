@@ -5,19 +5,21 @@ Form-level properties & methods
 ```ts
 value: V;
 isDirty(): boolean;
-isInvalid(): boolean;
+hasError(): boolean;
 isTouched(): boolean;
 setValue(value: V | ((val: V) => V), options?: SetValueOptions): void;
 unsetDirty(): void;
 unsetTouched(): void;
+validate(): boolean;
 ```
 
 Field-level properties & methods
 
 ```ts
+getFieldError<P extends FieldPath<V>>(fieldPath: P): string | null;
 getFieldValue<P extends FieldPath<V>>(fieldPath: P): FieldValue<V, P>;
 isFieldDirty<P extends FieldPath<V>>(fieldPath: P): boolean;
-isFieldInvalid<P extends FieldPath<V>>(fieldPath: P): boolean;
+hasFieldError<P extends FieldPath<V>>(fieldPath: P): boolean;
 isFieldTouched<P extends FieldPath<V>>(fieldPath: P): boolean;
 setFieldDirty<P extends FieldPath<V>>(fieldPath: P, options?: SetDirtyOptions): void;
 setFieldTouched<P extends FieldPath<V>>(fieldPath: P, options?: SetTouchedOptions): void;

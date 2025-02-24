@@ -10,15 +10,16 @@ import type {
   UnsetFieldDirtyOpts,
   UnsetFieldTouchedOpts,
 } from '../methods';
+import type { CreateFormOptions } from '../primitives';
 
 export interface FormState<V extends FormValue> {
   value: V;
   getFieldValue<P extends FieldPath<V>>(fieldPath: P): FieldValue<V, P>;
   isDirty(): boolean;
   isFieldDirty<P extends FieldPath<V>>(fieldPath: P): boolean;
-  isFieldInvalid<P extends FieldPath<V>>(fieldPath: P): boolean;
+  hasFieldError<P extends FieldPath<V>>(fieldPath: P): boolean;
   isFieldTouched<P extends FieldPath<V>>(fieldPath: P): boolean;
-  isInvalid(): boolean;
+  hasError(): boolean;
   isTouched(): boolean;
   setFieldDirty<P extends FieldPath<V>>(
     fieldPath: P,
@@ -46,8 +47,16 @@ export interface FormState<V extends FormValue> {
     options?: UnsetFieldTouchedOpts,
   ): void;
   unsetTouched(): void;
+  validate(): boolean;
 
   __internal: {
+    /**
+     * Options for the form.
+     *
+     * @internal
+     */
+    options?: CreateFormOptions<V>;
+
     /**
      * State of the form fields (e.g. dirty, touched, etc.).
      *
