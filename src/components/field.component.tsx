@@ -84,11 +84,13 @@ export function Field<
   const fieldPath = props.path;
   const transform = props.transform;
 
+  const errors = createMemo(() => getFieldErrors(formState, fieldPath));
+
   const fieldState = {
-    error: createMemo(() => getFieldError(formState, fieldPath)),
-    errors: createMemo(() => getFieldErrors(formState, fieldPath)),
+    error: createMemo(() => errors()[0] ?? null),
+    errors,
     isDirty: createMemo(() => isFieldDirty(formState, fieldPath)),
-    hasError: createMemo(() => hasFieldError(formState, fieldPath)),
+    hasError: createMemo(() => errors().length > 0),
     isTouched: createMemo(() => isFieldTouched(formState, fieldPath)),
     value: createMemo(() => getFieldValue(formState, fieldPath)),
   };

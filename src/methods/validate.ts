@@ -24,12 +24,12 @@ export function validate<V extends FormValue>(
   // Aggregate errors by field path. A single field can have multiple
   // errors.
   for (const error of result.error?.errors ?? []) {
-    const fieldPath = error.path.join('.');
+    const errorPath = error.path.join('.');
 
     const existingErrors =
-      fieldStates.errorFieldPaths.get(fieldPath) ?? [];
+      fieldStates.errorFieldPaths.get(errorPath) ?? [];
 
-    fieldStates.errorFieldPaths.set(fieldPath, [
+    fieldStates.errorFieldPaths.set(errorPath, [
       ...existingErrors,
       error.message,
     ]);
