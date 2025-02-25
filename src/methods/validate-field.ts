@@ -18,25 +18,29 @@ export function validateField<V extends FormValue, P extends FieldPath<V>>(
     return true;
   }
 
-  const result = options.schema.safeParse(formValue, {
-    path: fieldPath.split('.'),
-  });
+  const result = options.schema.safeParse(formValue);
 
   // Clear existing errors.
-  fieldStates.errorFieldPaths.delete(fieldPath);
+  for (const [errorFieldPath] of fieldStates.errorFieldPaths) {
+    if (errorFieldPath.startsWith(fieldPath)) {
+      fieldStates.errorFieldPaths.delete(errorFieldPath);
+    }
+  }
 
-  // Aggregate errors by field path. A single field can have multiple
-  // errors.
+  // Add errors for only the given field path.
   for (const error of result.error?.errors ?? []) {
-    const fieldPath = error.path.join('.');
+    const errorPath = error.path.join('.');
 
-    const existingErrors =
-      fieldStates.errorFieldPaths.get(fieldPath) ?? [];
+    // Allow errors for descendant paths.
+    if (errorPath.startsWith(fieldPath)) {
+      const existingErrors =
+        fieldStates.errorFieldPaths.get(errorPath) ?? [];
 
-    fieldStates.errorFieldPaths.set(fieldPath, [
-      ...existingErrors,
-      error.message,
-    ]);
+      fieldStates.errorFieldPaths.set(errorPath, [
+        ...existingErrors,
+        error.message,
+      ]);
+    }
   }
 
   return result.success;
