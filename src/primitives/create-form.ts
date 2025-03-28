@@ -31,7 +31,7 @@ export type CreateFormOptions<V extends FormValue> = {
   /**
    * The Zod schema to validate the form value against.
    */
-  schema?: z.ZodType<V>;
+  schema?: z.ZodSchema<V, any, any>;
 
   /**
    * When to validate the form.
