@@ -42,10 +42,10 @@ export type CreateFormOptions<V extends FormValue> = {
 };
 
 export function createForm<V extends FormValue>(
-  initialValue: V,
+  initialValue: () => V,
   options?: CreateFormOptions<V>,
 ): FormState<V> {
-  const [formValue, setFormValue] = createSignal<V>(initialValue);
+  const [formValue, setFormValue] = createSignal<V>(initialValue());
 
   const [fieldStates, setFieldStates] = createStore<FieldStates>({
     dirtyFieldPaths: new ReactiveSet(),
