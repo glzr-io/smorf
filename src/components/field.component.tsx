@@ -123,8 +123,10 @@ export function Field<
           ? transform.out(value)
           : (value as FieldValue<V, P>);
 
-        formState.setFieldValue(fieldPath, outgoingValue);
-        formState.setFieldDirty(fieldPath);
+        formState.setFieldValue(fieldPath, outgoingValue, {
+          setDirty: true,
+          validate: false,
+        });
 
         if (validateOn === 'change') {
           formState.validateField(fieldPath);
