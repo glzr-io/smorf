@@ -24,7 +24,7 @@ jobs:
       - uses: glzr-io/actions/setup-pnpm@main
         with:
           checkout: true
-          node-version: 20
+          node-version: 22
           fetch-depth: 0
 
       - run: pnpm build

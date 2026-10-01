@@ -9,6 +9,6 @@ jobs:
       - uses: glzr-io/actions/setup-pnpm@main
         with:
           checkout: true
-          node-version: 20
+          node-version: 22
 
       - run: pnpm build
