@@ -1,5 +1,3 @@
-import { batch } from 'solid-js';
-
 import type {
   FormValue,
   FieldPath,
@@ -44,23 +42,21 @@ export function setFieldValue<V extends FormValue, P extends FieldPath<V>>(
   const newValue =
     typeof value === 'function' ? value(currentValue) : value;
 
-  batch(() => {
-    formState.__internal.setFormValue(
-      updatedObject(formState.value, fieldPath, newValue),
-    );
+  formState.__internal.setFormValue(
+    updatedObject(formState.value, fieldPath, newValue),
+  );
 
-    if (fieldPath && options?.setTouched === true) {
-      formState.setFieldTouched(fieldPath);
-    }
+  if (fieldPath && options?.setTouched === true) {
+    formState.setFieldTouched(fieldPath);
+  }
 
-    if (fieldPath && options?.setDirty !== false) {
-      formState.setFieldDirty(fieldPath);
-    }
+  if (fieldPath && options?.setDirty !== false) {
+    formState.setFieldDirty(fieldPath);
+  }
 
-    if (fieldPath && options?.validate !== false) {
-      formState.validateField(fieldPath);
-    }
-  });
+  if (fieldPath && options?.validate !== false) {
+    formState.validateField(fieldPath);
+  }
 }
 
 // TODO: Avoid `any` types.

@@ -1,8 +1,7 @@
-import { ReactiveSet } from '@solid-primitives/set';
 import { ReactiveMap } from '@solid-primitives/map';
-import { createStore } from 'solid-js/store';
-import { createSignal } from 'solid-js';
-import { z } from 'zod';
+import { ReactiveSet } from '@solid-primitives/set';
+import { createSignal, untrack } from 'solid-js';
+import type { z } from 'zod';
 
 import type { FormValue, FormState, FieldStates } from '../types';
 import {
@@ -45,13 +44,16 @@ export function createForm<V extends FormValue>(
   initialValue: () => V,
   options?: CreateFormOptions<V>,
 ): FormState<V> {
-  const [formValue, setFormValue] = createSignal<V>(initialValue());
+  const [formValue, setFormValue] = createSignal<V>(
+    // The initial value is a one-time snapshot, so it shouldn't be tracked.
+    untrack(initialValue) as Exclude<V, Function>,
+  );
 
-  const [fieldStates, setFieldStates] = createStore<FieldStates>({
+  const fieldStates: FieldStates = {
     dirtyFieldPaths: new ReactiveSet(),
     errorFieldPaths: new ReactiveMap(),
     touchedFieldPaths: new ReactiveSet(),
-  });
+  };
 
   const formState: FormState<V> = {
     get value() {
@@ -80,7 +82,6 @@ export function createForm<V extends FormValue>(
       options,
       fieldStates,
       setFormValue,
-      setFieldStates,
     },
   };
 

@@ -68,13 +68,6 @@ export interface FormState<V extends FormValue> {
     fieldStates: FieldStates;
 
     /**
-     * Update states of form fields (e.g. dirty, touched, etc.).
-     *
-     * @internal
-     */
-    setFieldStates: (fieldStates: FieldStates) => void;
-
-    /**
      * Update form value.
      *
      * @internal

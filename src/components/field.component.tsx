@@ -1,4 +1,5 @@
-import { type Accessor, type JSXElement, createMemo } from 'solid-js';
+import { type Accessor, createMemo, untrack } from 'solid-js';
+import type { JSX } from '@solidjs/web';
 
 import type {
   ChangeEvent,
@@ -65,7 +66,7 @@ export interface FieldProps<
       onChange: (eventOrValue: ChangeEvent<T> | T) => void;
     }>,
     fieldState: FieldState<V, P>,
-  ) => JSXElement;
+  ) => JSX.Element;
 
   /**
    * When to validate the field.
@@ -106,36 +107,42 @@ export function Field<
       formState.__internal.options?.validateOn ??
       'change';
 
+    // The handlers read form state at call time without tracking it.
     return {
       value: incomingValue as T,
-      onBlur: () => {
-        formState.setFieldTouched(fieldPath);
+      onBlur: () =>
+        untrack(() => {
+          formState.setFieldTouched(fieldPath);
 
-        if (validateOn === 'blur') {
-          formState.validateField(fieldPath);
-        }
-      },
-      onChange: (eventOrValue: ChangeEvent<T> | T) => {
-        const value = getChangeValue(eventOrValue);
+          if (validateOn === 'blur') {
+            formState.validateField(fieldPath);
+          }
+        }),
+      onChange: (eventOrValue: ChangeEvent<T> | T) =>
+        untrack(() => {
+          const value = getChangeValue(eventOrValue);
 
-        // Transform outgoing value if there is a transform function.
-        const outgoingValue = transform?.out
-          ? transform.out(value)
-          : (value as FieldValue<V, P>);
+          // Transform outgoing value if there is a transform function.
+          const outgoingValue = transform?.out
+            ? transform.out(value)
+            : (value as FieldValue<V, P>);
 
-        formState.setFieldValue(fieldPath, outgoingValue, {
-          setDirty: true,
-          validate: false,
-        });
+          formState.setFieldValue(fieldPath, outgoingValue, {
+            setDirty: true,
+            validate: false,
+          });
 
-        if (validateOn === 'change') {
-          formState.validateField(fieldPath);
-        }
+          if (validateOn === 'change') {
+            formState.validateField(fieldPath);
+          }
 
-        if (validateOn === 'change-after-blur' && fieldState.isTouched()) {
-          formState.validateField(fieldPath);
-        }
-      },
+          if (
+            validateOn === 'change-after-blur' &&
+            fieldState.isTouched()
+          ) {
+            formState.validateField(fieldPath);
+          }
+        }),
     };
   });
 
